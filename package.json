@@ -1,19 +1,19 @@
 {
-  "name": "md-date-time",
-  "filename": "md-date-time.min.js",
+  "name": "md-date",
+  "filename": "md-date.min.js",
   "version": "0.0.14",
   "description": "An implementation of the Material Design Date-Time picker",
   "maintainers": [
     {
-      "name": "SimeonC"
+      "name": "hamdouni"
     }
   ],
   "keywords": [
     "AngularJS"
   ],
   "license": "MIT",
-  "homepage": "http://simeonc.github.io/md-date-time",
-  "main": "./dist/md-date-time.min.js",
+  "homepage": "http://github.com",
+  "main": "./dist/md-date.min.js",
   "devDependencies": {
     "bower": "^1.3.12",
     "coffee-script": "^1.8.0",
@@ -45,6 +45,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/simeonc/md-date-time.git"
+    "url": "git://github.com/hamdouni/md-date.git"
   }
 }

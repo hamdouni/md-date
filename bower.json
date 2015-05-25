@@ -1,11 +1,11 @@
 {
-  "name": "md-date-time",
+  "name": "md-date",
   "version": "0.0.14",
   "main": [
-    "./dist/md-date-time.js",
-    "./dist/md-date-time.css"
+    "./dist/md-date.js",
+    "./dist/md-date.css"
   ],
-  "description": "An implementation of the Material Design Date-Time picker",
+  "description": "An implementation of the Material Design Date picker",
   "keywords": [
     "angular"
   ],
@@ -22,5 +22,5 @@
     "angular": "^1.2.x"
   },
   "license": "MIT",
-  "homepage": "http://simeonc.github.io/md-date-time"
+  "homepage": "http://github.com"
 }

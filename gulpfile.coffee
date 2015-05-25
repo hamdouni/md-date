@@ -23,16 +23,20 @@ jade = require 'gulp-jade'
 ngtemplate = require 'gulp-ngtemplate'
 htmlmin = require 'gulp-htmlmin'
 
+gulp.task 'watch', -> 
+	gulp.watch '**/*.coffee', ['compile']
+	gulp.watch '**/*.jade', ['compile']
+	gulp.watch '**/*.styl', ['compile']
 gulp.task 'clean:dist', (cb) -> del ['dist/*'], cb
 gulp.task 'compile:jade', ['clean:dist'], ->
 	gulp.src ['./src/template.jade']
 		.pipe jade()
-		.pipe rename 'md-date-time.tpl.temp'
+		.pipe rename 'md-date.tpl.temp'
 		.pipe gulp.dest 'dist'
-		.pipe rename 'md-date-time.tpl.html'
+		.pipe rename 'md-date.tpl.html'
 		.pipe htmlmin collapseWhitespace: true
-		.pipe ngtemplate module: 'mdDateTime'
-		.pipe rename 'md-date-time.tpl.js.temp'
+		.pipe ngtemplate module: 'mdDate'
+		.pipe rename 'md-date.tpl.js.temp'
 		.pipe gulp.dest 'dist'
 gulp.task 'compile:coffee', ['compile:jade'], ->
 	gulp.src ['./src/main.coffee']
@@ -41,16 +45,16 @@ gulp.task 'compile:coffee', ['compile:jade'], ->
 		.pipe coffeelint.reporter()
 		.pipe coffeelint.reporter 'fail'
 		.pipe coffee bare: true
-		.pipe rename 'md-date-time.js'
+		.pipe rename 'md-date.js'
 		.pipe gulp.dest 'dist'
 gulp.task 'compile:javascript', ['compile:coffee'], ->
 	pkg = JSON.parse fs.readFileSync './package.json', 'utf8'
-	gulp.src ['./dist/md-date-time.js','./dist/md-date-time.tpl.js.temp']
-		.pipe order ['dist/md-date-time.js','dist/md-date-time.tpl.js.temp']
-		.pipe concat 'md-date-time.js'
+	gulp.src ['./dist/md-date.js','./dist/md-date.tpl.js.temp']
+		.pipe order ['dist/md-date.js','dist/md-date.tpl.js.temp']
+		.pipe concat 'md-date.js'
 		.pipe concat.header """/*
-			@license md-date-time
-			@author SimeonC
+			@license md-date
+			@author hamdouni
 			@license 2015 MIT
 			@version #{pkg.version}
 			
@@ -66,15 +70,15 @@ gulp.task 'compile:stylus', ['clean:dist'], ->
 		.pipe autoprefixer()
 		.pipe concat()
 		.pipe concat.header """/*
-			@license md-date-time
-			@author SimeonC
+			@license md-date
+			@author hamdouni
 			@license 2015 MIT
 			@version #{pkg.version}
 			
 			See README.md for requirements and use.
 		*/
 		"""
-		.pipe rename 'md-date-time.css'
+		.pipe rename 'md-date.css'
 		.pipe gulp.dest 'dist'
 
 gulp.task 'compile:main', ['compile:javascript','compile:stylus']
