@@ -7,6 +7,8 @@ A Angular Material Directive that let your users select a date and only a date.
 <date-picker ng-model="myDate" placeholder="Select a date"></date-picker>
 ```
 
+Demo here : http://barim.us/md-date/
+
 ## Original work
 
 Thanks to Simeon Cheeseman (https://github.com/simeonc) for the original work, including far more features, see at https://github.com/SimeonC/md-date-time
