@@ -1,15 +1,16 @@
 mdDate
 ===========
 
-A Angular Material Directive that let your users select a date and only a date.
+An Angular Material Directive that let your users select a date and only a date.
 
-<img src="http://barim.us/md-date.png">
 
 ```html
 <date-picker ng-model="myDate" placeholder="Select a date"></date-picker>
 ```
 
-Demo here : http://barim.us/md-date/
+<img style="margin:0 auto;" src="http://barim.us/md-date.png">
+
+Live demo here : http://barim.us/md-date/
 
 ## Original work
 
