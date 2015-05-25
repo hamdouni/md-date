@@ -32,9 +32,8 @@ Thanks to Simeon Cheeseman (https://github.com/simeonc) for the original work, i
 
 ## Developer Notes
 
-When checking out, you need a node.js installation, running `npm install` will get you setup with everything to run the compile and unit tests tasks (Coming Soon!).
-All changes should be done in the lib folder, running `gulp compile` to compile the app or use `gulp watch` to compile the files as you save them.
-Read the CONTRIBUTING.md file before starting a PR.
+When checking out, you need a node.js installation, running `npm install` will get you setup with everything to run the compile.
+Run `gulp compile` to compile the app or use `gulp watch` to compile the files as you save them.
 
 ## License
 
