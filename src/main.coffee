@@ -8,10 +8,6 @@ angular.module('mdDate', [])
 	require: 'ngModel'
 	templateUrl: 'md-date.tpl.html'
 	link: (scope, element, attrs, ngModel) ->
-		attrs.$observe 'mindate', (val) ->
-			if val? and angular.isDate val then scope.restrictions.mindate = val
-		attrs.$observe 'maxdate', (val) ->
-			if val? and angular.isDate val then scope.restrictions.maxdate = val
 		attrs.$observe 'placeholder', (val) ->
 			if val? then scope._placeholder = val
 		ngModel.$render = -> scope.setDate ngModel.$modelValue
@@ -19,8 +15,15 @@ angular.module('mdDate', [])
 		saveFn = $parse attrs.onSave
 		cancelFn = $parse attrs.onCancel
 		
+		scope.$watch '_viewValue', (value) ->
+			if value?
+				scope.setDate value
+				scope._modelValue = scope.date
+ 
 		scope.save = ->
-			scope._modelValue = moment(scope.date).format("DD/MM/YYYY")
+			#console.log('save ' + scope.date)
+			scope._viewValue = moment(scope.date).format("DD/MM/YYYY")
+			scope._modelValue = scope.date
 			ngModel.$setDirty()
 			scope._showPicker = false
 			saveFn scope.$parent, $value: scope.date
@@ -29,17 +32,15 @@ angular.module('mdDate', [])
 			ngModel.$render()
 			scope._showPicker = false
 	controller: ['$scope', (scope) ->
-		scope.restrictions =
-			mindate: undefined
-			maxdate: undefined
+		moment().utc()
 		scope.setDate = (newVal) ->
-			console.log(newVal)
-			console.log(moment(newVal,"DD/MM/YYYY"))
-			scope.date = if newVal? then moment(newVal,"DD/MM/YYYY").toDate()
-			else
-				t = new Date()
-				new Date(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()))
-			console.log("debug:" + scope.date)
+			#console.log('setDate ' + if newVal? then newVal else '')
+			# update from input in the form dd/mm/yyyy or set to today
+			t = if newVal? then moment(newVal,"DD/MM/YYYY").toDate()
+			else new Date()
+			# convert date to utc format (we don't care about hours)
+			scope.date = new Date(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()))
+			# set the calendar year and month
 			scope.calendar._year = scope.date.getFullYear()
 			scope.calendar._month = scope.date.getMonth()
 		scope._showPicker = false
@@ -55,7 +56,8 @@ angular.module('mdDate', [])
 				else if new Date(@_year, @_month, d).getTime() is new Date().setHours(0,0,0,0) then "today"
 				else ""
 				# coffeelint: enable=max_line_length
-			select: (d) -> scope.date.setFullYear @_year, @_month, d
+			#select: (d) -> scope.date.setFullYear @_year, @_month, d
+			select: (d) -> scope.setDate d + "/" + (@_month+1) + "/" + @_year
 			monthChange: ->
 				if not @_year? or isNaN @_year then @_year = new Date().getFullYear()
 				scope.date.setFullYear @_year, @_month
@@ -71,5 +73,4 @@ angular.module('mdDate', [])
 						@_year++
 				@monthChange()
 		scope.setNow = -> scope.setDate()
-		scope._mode = 'date'
 ]]

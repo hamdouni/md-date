@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body ng-app="demo" ng-controller="AppCtrl">
+{{user}}
 	<div layout="column">
 	  <md-content md-theme="docs-dark" layout-padding layout="row" layout-sm="column">
 	    <md-input-container>
@@ -87,8 +88,8 @@ angular.module('demo', ['ngMaterial', 'mdDate'])
 	$scope.dpSave = function(val) { 
 		$scope.dateValue = moment(val).format('DD/MM/YYYY');
 	}
-	$scope.dateValueUTC = new Date(Date.UTC(2015,5,1));
-	$scope.dateValue = moment($scope.dateValueUTC).format('DD/MM/YYYY');
+	$scope.dateValueUTC = new Date(Date.UTC(2015,5,2));
+	$scope.submissionDate = moment($scope.dateValueUTC).format('DD/MM/YYYY');
 }]);
 </script>
 </body>
