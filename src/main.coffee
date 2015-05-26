@@ -10,19 +10,34 @@ angular.module('mdDate', [])
 	link: (scope, element, attrs, ngModel) ->
 		attrs.$observe 'placeholder', (val) ->
 			if val? then scope._placeholder = val
-		ngModel.$render = -> scope.setDate ngModel.$modelValue
+
+		toHumanDate = (v) ->
+			moment(v).format("DD/MM/YYYY")
+
+		# previous date viewed
+		previousDate = ''
+
+		# init calendar with today
+		scope.setDate()
+
+		# set default to model value
+		scope._viewValue = if scope._modelValue? then scope._modelValue
 		
 		saveFn = $parse attrs.onSave
 		cancelFn = $parse attrs.onCancel
 		
-		scope.$watch '_viewValue', (value) ->
-			if value?
-				scope.setDate value
-				scope._modelValue = scope.date
+		scope.$watch '_viewValue', (v) ->
+			if !(moment(v).isSame(previousDate))
+				previousDate = v
+				scope.setFromView v
+
+		scope.$watch '_modelValue', (v) ->
+			if v? and !(moment(v).isSame(scope._viewValue))
+				scope._viewValue = toHumanDate(v)
  
 		scope.save = ->
 			#console.log('save ' + scope.date)
-			scope._viewValue = moment(scope.date).format("DD/MM/YYYY")
+			scope._viewValue = toHumanDate(scope.date)
 			scope._modelValue = scope.date
 			ngModel.$setDirty()
 			scope._showPicker = false
@@ -32,11 +47,18 @@ angular.module('mdDate', [])
 			ngModel.$render()
 			scope._showPicker = false
 	controller: ['$scope', (scope) ->
-		moment().utc()
+
+		fromHumanDate = (v) ->
+			moment(v,"DD/MM/YYYY").toDate()
+
+		scope.setFromView = (newVal) ->
+			if newVal?
+				scope.setDate newVal
+				scope._modelValue = scope.date
 		scope.setDate = (newVal) ->
 			#console.log('setDate ' + if newVal? then newVal else '')
 			# update from input in the form dd/mm/yyyy or set to today
-			t = if newVal? then moment(newVal,"DD/MM/YYYY").toDate()
+			t = if newVal? then fromHumanDate(newVal)
 			else new Date()
 			# convert date to utc format (we don't care about hours)
 			scope.date = new Date(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()))

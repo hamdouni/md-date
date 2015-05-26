@@ -1,9 +1,8 @@
 .md-date
 	md-input-container(flex)
-		label
-			{{_placeholder}}
+		label {{_placeholder}}
 		md-icon(md-font-icon="fa-calendar" class="fa fa-lg" ng-click="_showPicker=!_showPicker")
-		input(ng-model="_viewValue")
+		input(ng-model="_viewValue" ng-model-options="{updateOn: 'blur'}")
 	.voile(ng-show="_showPicker")
 	.picker(ng-show="_showPicker")
 		.control
