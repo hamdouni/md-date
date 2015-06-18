@@ -23,10 +23,10 @@ jade = require 'gulp-jade'
 ngtemplate = require 'gulp-ngtemplate'
 htmlmin = require 'gulp-htmlmin'
 
-gulp.task 'watch', -> 
-	gulp.watch '**/*.coffee', ['compile']
-	gulp.watch '**/*.jade', ['compile']
-	gulp.watch '**/*.styl', ['compile']
+gulp.task 'watch', ->
+	gulp.watch '**/*.coffee', ['compile:coffee']
+	gulp.watch '**/*.jade', ['compilei:jade']
+	gulp.watch '**/*.styl', ['compile:stylus']
 gulp.task 'clean:dist', (cb) -> del ['dist/*'], cb
 gulp.task 'compile:jade', ['clean:dist'], ->
 	gulp.src ['./src/template.jade']
@@ -132,7 +132,7 @@ gulp.task 'prerel', ->
 		, 'compile'
 		, 'tagversion'
 	)
-gulp.task 'patch', -> 
+gulp.task 'patch', ->
 	runSequence(
 		'release:patch'
 		, 'changelog'

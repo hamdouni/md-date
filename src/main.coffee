@@ -1,38 +1,45 @@
 angular.module('mdDate', [])
 .directive 'datePicker', ['$filter', '$sce', '$rootScope', '$parse', ($filter, $sce, $rootScope, $parse) ->
 	_dateFilter = $filter 'date'
-	restrict: 'AE'
+	restrict: 'E'
 	replace: true
 	scope:
 		_modelValue: '=ngModel'
 	require: 'ngModel'
 	templateUrl: 'md-date.tpl.html'
 	link: (scope, element, attrs, ngModel) ->
+
 		attrs.$observe 'placeholder', (val) ->
 			if val? then scope._placeholder = val
 
 		toHumanDate = (v) ->
 			moment(v).format("DD/MM/YYYY")
 
-		# previous date viewed
-		previousDate = ''
+		# init previous date viewed with today
+		previousDate = new Date()
 
 		# init calendar with today
 		scope.setDate()
 
 		# set default to model value
-		scope._viewValue = if scope._modelValue? then scope._modelValue
+		scope._viewValue = if scope._modelValue? then toHumanDate scope._modelValue
 		
 		saveFn = $parse attrs.onSave
 		cancelFn = $parse attrs.onCancel
 		
+		# if the view is changed and to avoid looping betwen model and view modification
+		# test if the new value is exactly the same or not
+		# don't forget the viewValue is human format ie DD/MM/YYYY
 		scope.$watch '_viewValue', (v) ->
-			if !(moment(v).isSame(previousDate))
+			if !(moment(v,"DD/MM/YYYY").isSame(previousDate))
 				previousDate = v
 				scope.setFromView v
 
+		# if the model is changed and to avoid looping between model and view modification
+		# test if the new value is exactly the same or not
+		# don't forget the modelValue is JS Date
 		scope.$watch '_modelValue', (v) ->
-			if v? and !(moment(v).isSame(scope._viewValue))
+			if v? and !(moment(v).isSame(scope._modelValue))
 				scope._viewValue = toHumanDate(v)
  
 		scope.save = ->
@@ -46,6 +53,7 @@ angular.module('mdDate', [])
 			cancelFn scope.$parent, {}
 			ngModel.$render()
 			scope._showPicker = false
+
 	controller: ['$scope', (scope) ->
 
 		fromHumanDate = (v) ->
@@ -55,8 +63,9 @@ angular.module('mdDate', [])
 			if newVal?
 				scope.setDate newVal
 				scope._modelValue = scope.date
+
 		scope.setDate = (newVal) ->
-			#console.log('setDate ' + if newVal? then newVal else '')
+			console.log('setDate ' + if newVal? then newVal else '')
 			# update from input in the form dd/mm/yyyy or set to today
 			t = if newVal? then fromHumanDate(newVal)
 			else new Date()
@@ -65,7 +74,9 @@ angular.module('mdDate', [])
 			# set the calendar year and month
 			scope.calendar._year = scope.date.getFullYear()
 			scope.calendar._month = scope.date.getMonth()
+
 		scope._showPicker = false
+
 		scope.calendar =
 			_month: 0
 			_year: 0
@@ -94,5 +105,6 @@ angular.module('mdDate', [])
 						@_month -= 12
 						@_year++
 				@monthChange()
+
 		scope.setNow = -> scope.setDate()
 ]]
