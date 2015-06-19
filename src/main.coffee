@@ -65,7 +65,7 @@ angular.module('mdDate', [])
 				scope._modelValue = scope.date
 
 		scope.setDate = (newVal) ->
-			console.log('setDate ' + if newVal? then newVal else '')
+			#console.log('setDate ' + if newVal? then newVal else '')
 			# update from input in the form dd/mm/yyyy or set to today
 			t = if newVal? then fromHumanDate(newVal)
 			else new Date()
