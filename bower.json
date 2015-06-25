@@ -24,7 +24,7 @@
   "dependencies": {
     "angular": "^1.2.x",
     "momentjs": "~2.10.3",
-    "angular-material": "~0.10.0"
+    "angular-material": "^0.9.x"
   },
   "repository": {
     "type": "git",
