@@ -1,7 +1,7 @@
 ### 0.1.0 (2015-06-25)
 
 
-Bower packaging
+Bower packaging fixing directories
 
 
 ### 0.0.14 (2015-03-23)
