@@ -4,7 +4,7 @@
     "./dist/md-date.js",
     "./dist/md-date.css"
   ],
-  "description": "An Date Only picker based on Angular-Material",
+  "description": "A date-only picker based on Angular-Material",
   "keywords": [
     "angular"
   ],
@@ -15,13 +15,16 @@
     "test*",
     "demo*",
     "Gruntfile.js",
+    "src*",
+    "*.coffee",
+    "changelog.md",
+    "coffeelint.json",
     "package.json"
   ],
   "dependencies": {
     "angular": "^1.2.x",
     "momentjs": "~2.10.3",
     "angular-material": "~0.10.0"
-
   },
   "repository": {
     "type": "git",
