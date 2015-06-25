@@ -20,12 +20,12 @@ Thanks to Simeon Cheeseman (https://github.com/simeonc) for the original work, i
 
 1. `AngularJS` ≥ `1.2.x`
 1. [Angular-Material](https://github.com/angular/material)
+1. [MomentJS](http://momentjs.com)
 
 ### Usage
 
 1. Include `md-date.js` and `md-date.css`.
-2. Add a dependency to `mdDate` in your app module, for example: ```angular.module('myModule', ['mdDate'])```.
-3. Some implementation settings are required to get this useful, but for basic inline use:
+1. Add a dependency to `mdDate` in your app module, for example: ```angular.module('myModule', ['mdDate'])```.
 ```html
 <date-picker ng-model="dateValue"></date-picker>
 ```

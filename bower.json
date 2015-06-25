@@ -1,8 +1,8 @@
 {
   "name": "md-date",
   "main": [
-    "./dist/md-date.js",
-    "./dist/md-date.css"
+    "md-date.js",
+    "md-date.css"
   ],
   "description": "A date-only picker based on Angular-Material",
   "keywords": [
