@@ -52,8 +52,7 @@ gulp.task 'compile:javascript', ['compile:coffee'], ->
 	gulp.src ['./dist/md-date.js','./dist/md-date.tpl.js.temp']
 		.pipe order ['dist/md-date.js','dist/md-date.tpl.js.temp']
 		.pipe concat 'md-date.js'
-		.pipe concat.header """/*
-			@license md-date
+		.pipe concat.header """/* md-date
 			@author hamdouni
 			@license 2015 MIT
 			@version #{pkg.version}
@@ -62,6 +61,7 @@ gulp.task 'compile:javascript', ['compile:coffee'], ->
 		*/
 		"""
 		.pipe gulp.dest 'dist'
+		.pipe gulp.dest '.'
 	
 gulp.task 'compile:stylus', ['clean:dist'], ->
 	pkg = JSON.parse fs.readFileSync './package.json', 'utf8'
@@ -69,8 +69,7 @@ gulp.task 'compile:stylus', ['clean:dist'], ->
 		.pipe stylus()
 		.pipe autoprefixer()
 		.pipe concat()
-		.pipe concat.header """/*
-			@license md-date
+		.pipe concat.header """/* md-date
 			@author hamdouni
 			@license 2015 MIT
 			@version #{pkg.version}
@@ -80,6 +79,7 @@ gulp.task 'compile:stylus', ['clean:dist'], ->
 		"""
 		.pipe rename 'md-date.css'
 		.pipe gulp.dest 'dist'
+		.pipe gulp.dest '.'
 
 gulp.task 'compile:main', ['compile:javascript','compile:stylus']
 gulp.task 'compile', ['compile:main'], (cb) -> del ['dist/*.temp'], cb

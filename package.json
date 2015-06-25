@@ -1,7 +1,7 @@
 {
   "name": "md-date",
   "filename": "md-date.min.js",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "description": "An implementation of the Material Design Date-Time picker",
   "maintainers": [
     {
