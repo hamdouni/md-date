@@ -12,8 +12,12 @@ angular.module('mdDate', [])
 		attrs.$observe 'placeholder', (val) ->
 			if val? then scope._placeholder = val
 
+		isDate = (v) ->
+			return Object.prototype.toString.call(v) == '[object Date]'
+
 		toHumanDate = (v) ->
-			moment(v).format("DD/MM/YYYY")
+			if isDate(v)
+				moment(v).format("DD/MM/YYYY")
 
 		# init previous date viewed with today
 		previousDate = new Date()
@@ -31,7 +35,9 @@ angular.module('mdDate', [])
 		# test if the new value is exactly the same or not
 		# don't forget the viewValue is human format ie DD/MM/YYYY
 		scope.$watch '_viewValue', (v) ->
-			if !(moment(v,"DD/MM/YYYY").isSame(previousDate))
+			oldDate = moment(previousDate,"DD/MM/YYYY")
+			newDate = moment(v,"DD/MM/YYYY")
+			if !(newDate.isSame(oldDate))
 				previousDate = v
 				scope.setFromView v
 
@@ -39,7 +45,7 @@ angular.module('mdDate', [])
 		# test if the new value is exactly the same or not
 		# don't forget the modelValue is JS Date
 		scope.$watch '_modelValue', (v) ->
-			if v? and !(moment(v).isSame(scope._modelValue))
+			if v? and isDate(v) and !(moment(v).isSame(scope._modelValue))
 				scope._viewValue = toHumanDate(v)
  
 		scope.save = ->
