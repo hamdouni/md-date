@@ -1,11 +1,10 @@
 {
   "name": "md-date",
-  "version": "0.0.14",
   "main": [
     "./dist/md-date.js",
     "./dist/md-date.css"
   ],
-  "description": "An implementation of the Material Design Date picker",
+  "description": "An Date Only picker based on Angular-Material",
   "keywords": [
     "angular"
   ],
@@ -19,8 +18,16 @@
     "package.json"
   ],
   "dependencies": {
-    "angular": "^1.2.x"
+    "angular": "^1.2.x",
+    "momentjs": "~2.10.3",
+    "angular-material": "~0.10.0"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hamdouni/md-date.git"
   },
   "license": "MIT",
-  "homepage": "http://github.com"
+  "homepage": "http://github.com/hamdouni/md-date",
+  "authors": ["Simeon Cheeseman", "Brahim Hamdouni"],
 }
