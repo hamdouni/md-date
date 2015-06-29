@@ -1,7 +1,7 @@
 /* md-date
 	@author hamdouni
 	@license 2015 MIT
-	@version 0.3.1
+	@version 0.1.2
 	
 	See README.md for requirements and use.
 */angular.module('mdDate', []).directive('datePicker', [
@@ -46,10 +46,17 @@
           }
         });
         scope.$watch('_modelValue', function(v) {
-          var oldDate;
-          oldDate = moment(scope._viewValue, "DD/MM/YYYY");
-          if ((v != null) && isDate(v) && !(moment(v).isSame(oldDate))) {
-            return scope._viewValue = toHumanDate(v);
+          var newDate, oldDate;
+          console.log("1:" + v + ":" + scope._viewValue);
+          if (v != null) {
+            oldDate = moment(scope._viewValue, "DD/MM/YYYY");
+            newDate = moment(v, "YYYY-MM-DDTHH:mm:ssZ");
+            if (!newDate.isValid()) {
+              newDate = moment(v);
+            }
+            if (newDate.isValid() && !(newDate.isSame(oldDate))) {
+              return scope._viewValue = toHumanDate(newDate.toDate());
+            }
           }
         });
         scope.save = function() {

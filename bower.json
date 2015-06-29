@@ -1,6 +1,6 @@
 {
   "name": "md-date",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": [
     "md-date.js",
     "md-date.css"
