@@ -47,7 +47,6 @@
         });
         scope.$watch('_modelValue', function(v) {
           var newDate, oldDate;
-          console.log("1:" + v + ":" + scope._viewValue);
           if (v != null) {
             oldDate = moment(scope._viewValue, "DD/MM/YYYY");
             newDate = moment(v, "YYYY-MM-DDTHH:mm:ssZ");

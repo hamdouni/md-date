@@ -11,7 +11,7 @@ user : {{user}} <br/>
 	<div layout="column">
 	  <md-content layout-padding>
 	    <form name="userForm">
-	      <date-picker ng-model="user.birthday" placeholder="Birthday" flex></date-picker>
+	      <date-picker ng-model="user.stringDate" placeholder="String Date" flex></date-picker>
 	      <date-picker ng-model="user.submissionDate" placeholder="Submission Date" flex></date-picker>
 	      <date-picker ng-model="user.dejaDate" placeholder="Deja Date" flex></date-picker>
 	      <div layout layout-sm="column">
@@ -51,6 +51,7 @@ angular.module('demo', ['ngMaterial', 'mdDate'])
 		$scope.user.submissionDate = new Date("2000-12-20");
 	}
 	$scope.user.dejaDate = new Date("2015-03-25");
+	$scope.user.stringDate = "2015-06-28T00:00:00Z"; /* exemple from a mysql backend */
 }]);
 </script>
 </body>
