@@ -6,7 +6,6 @@
 </head>
 <body ng-app="demo" ng-controller="AppCtrl">
 user : {{user}} <br/>
-scope._modelValue : {{_modelValue}} <br/>
 
 <button type="button" ng-click="activeUser()">activate</button>
 	<div layout="column">
@@ -49,9 +48,9 @@ angular.module('demo', ['ngMaterial', 'mdDate'])
 .controller('AppCtrl', [ '$scope' ,function ($scope) {
 	$scope.user = {}
 	$scope.activeUser = function() {
-		$scope.user.submissionDate = "01/01/2000";
+		$scope.user.submissionDate = new Date("2000-12-20");
 	}
-	$scope.user.dejaDate = "09/09/1999";
+	$scope.user.dejaDate = new Date("2015-03-25");
 }]);
 </script>
 </body>

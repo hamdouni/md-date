@@ -45,7 +45,8 @@ angular.module('mdDate', [])
 		# test if the new value is exactly the same or not
 		# don't forget the modelValue is JS Date
 		scope.$watch '_modelValue', (v) ->
-			if v? and isDate(v) and !(moment(v).isSame(scope._modelValue))
+			oldDate = moment(scope._viewValue,"DD/MM/YYYY")
+			if v? and isDate(v) and !(moment(v).isSame(oldDate))
 				scope._viewValue = toHumanDate(v)
  
 		scope.save = ->

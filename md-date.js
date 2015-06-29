@@ -46,7 +46,9 @@
           }
         });
         scope.$watch('_modelValue', function(v) {
-          if ((v != null) && isDate(v) && !(moment(v).isSame(scope._modelValue))) {
+          var oldDate;
+          oldDate = moment(scope._viewValue, "DD/MM/YYYY");
+          if ((v != null) && isDate(v) && !(moment(v).isSame(oldDate))) {
             return scope._viewValue = toHumanDate(v);
           }
         });
