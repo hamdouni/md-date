@@ -1,6 +1,6 @@
 {
   "name": "md-date",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "main": [
     "md-date.js",
     "md-date.css"
@@ -33,5 +33,8 @@
   },
   "license": "MIT",
   "homepage": "http://github.com/hamdouni/md-date",
-  "authors": ["Simeon Cheeseman", "Brahim Hamdouni"]
+  "authors": [
+    "Simeon Cheeseman",
+    "Brahim Hamdouni"
+  ]
 }
