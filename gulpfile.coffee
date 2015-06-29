@@ -105,9 +105,9 @@ releaseVersion = (importance) ->
 		# save it back to filesystem
 		.pipe gulp.dest './'
 gulp.task 'tagversion', ->
-	gulp.src ['./package.json','./bower.json','./changelog.md','./dist/*']
+	gulp.src ['./package.json','./bower.json','./changelog.md','./md-date.js','./md-date.css']
 		# commit the changed version number
-		.pipe git.commit 'chore(release): Bump Version Number'
+		.pipe git.commit 'Bump Version Number'
 		# Filter down to only one file
 		.pipe filter 'package.json'
 		# **tag it in the repository**
